@@ -1,0 +1,95 @@
+{
+    "name": "XinFin Token List",
+    "logoURI": "https://explorer.apothem.network/_nuxt/img/blocksscan-logo_white.3b8c377.svg",
+    "keywords": [
+      "xinfin",
+      "xrc"
+    ],
+    "tags": {
+      "stablecoin": {
+        "name": "stablecoin",
+        "description": "Tokens that are fixed to an external asset, e.g. the US dollar"
+      },
+      "ethereum": {
+        "name": "ethereum",
+        "description": "Asset bridged from ethereum"
+      },
+      "lp-token": {
+        "name": "lp-token",
+        "description": "Asset representing liquidity provider token"
+      },
+      "wrapped-sollet": {
+        "name": "wrapped-sollet",
+        "description": "Asset wrapped using sollet bridge"
+      },
+      "wrapped": {
+        "name": "wrapped",
+        "description": "Asset wrapped using wormhole bridge"
+      },
+      "leveraged": {
+        "name": "leveraged",
+        "description": "Leveraged asset"
+      },
+      "bull": {
+        "name": "bull",
+        "description": "Leveraged Bull asset"
+      },
+      "bear": {
+        "name": "bear",
+        "description": "Leveraged Bear asset"
+      },
+      "nft": {
+        "name": "nft",
+        "description": "Non-fungible token"
+      },
+      "security-token": {
+        "name": "security-token",
+        "description": "Tokens that are used to gain access to an electronically restricted resource"
+      },
+      "utility-token": {
+        "name": "utility-token",
+        "description": "Tokens that are designed to be spent within a certain blockchain ecosystem e.g. most of the SPL-Tokens"
+      },
+      "tokenized-stock": {
+        "name": "tokenized-stock",
+        "description": "Tokenized stocks are tokenized derivatives that represent traditional securities, particularly shares in publicly firms traded on regulated exchanges"
+      }
+    },
+    "timestamp": "2021-03-03T19:57:21+0000",
+    "tokens": [
+      {
+        "chainId": 51,
+        "address": "0xdf1Efd50Fc91b377DA328F42f408f3BF904143D0",
+        "symbol": "MTK",
+        "name": "MyToken",
+        "decimals": 18,
+        "logoURI": "https://explorer.apothem.network/_nuxt/img/blocksscan-logo_white.3b8c377.svg",
+        "tags": [
+          "currency", "xrc20"
+        ]
+      },
+      {
+        "chainId": 101,
+        "address": "CbNYA9n3927uXUukee2Hf4tm3xxkffJPPZvGazc2EAH1",
+        "symbol": "agEUR",
+        "name": "agEUR (Wormhole)",
+        "decimals": 8,
+        "logoURI": "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/CbNYA9n3927uXUukee2Hf4tm3xxkffJPPZvGazc2EAH1/logo.png",
+        "tags": [
+          "ethereum",
+          "wrapped",
+          "Bridged"
+        ],
+        "extensions": {
+          "address": "0x1a7e4e63778B4f12a199C062f3eFdD288afCBce8",
+          "assetContract": "https://etherscan.io/address/0x1a7e4e63778B4f12a199C062f3eFdD288afCBce8",
+          "bridgeContract": "https://etherscan.io/address/0x3ee18B2214AFF97000D974cf647E7C347E8fa585",
+          "coingeckoId": "ageur",
+          "description": "Angle is the first decentralized, capital efficient and over-collateralized stablecoin protocol",
+          "discord": "https://discord.gg/z3kCpTaKMh",
+          "twitter": "https://twitter.com/AngleProtocol",
+          "website": "https://www.angle.money"
+        }
+      }
+    ]
+  }

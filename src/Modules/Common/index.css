@@ -12,3 +12,19 @@ opacity: 1;
 .list-item {
     margin-bottom: 21px !important;
 }
+.footer-input{
+    width: 114px;
+height: 32px;
+/* UI Properties */
+background: #0E276C 0% 0% no-repeat padding-box;
+border-radius: 6px;
+opacity: 1;
+border: none;
+margin-left: 19px;
+}
+.powered{
+    font: normal normal medium 12px/15px Inter;
+letter-spacing: 0px;
+color: #D9E3FF;
+opacity: 1;
+}

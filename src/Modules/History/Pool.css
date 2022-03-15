@@ -78,3 +78,34 @@ link.active {
 
     border-bottom: 1px solid rgba(224, 224, 224, 1) !important;
 }
+.MuiPaper-elevation1 {
+    box-shadow: none !important;
+}
+.MuiTableCell-root {
+
+    border-bottom: 1px solid rgba(224, 224, 224, 1) !important;
+}
+.table-head{
+    font-family: normal normal medium 16px/20px Inter !important;
+letter-spacing: 0px !important;
+color: #404040 !important;
+opacity: 1 !important;
+font-size: 16px !important;
+}
+.MuiTableCell-root {
+    font-family: unset!important;
+    /* font-family: ; */
+    font-weight: normal !important;
+    
+    /* border-bottom: 1px solid rgba(224, 224, 224, 1); */
+
+}
+.MuiTableCell-head {
+    color: rgba(0, 0, 0, 0.87);
+    font-weight: 500 !important;
+    line-height: 1.5rem;
+}
+.MuiTableCell-body {
+    color:  #404040 !important;
+    font-size: 15px !important;
+}

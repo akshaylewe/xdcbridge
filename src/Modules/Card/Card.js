@@ -1,5 +1,5 @@
 import "./Card.css";
-import FormMain from "../FormMain/FormMain";
+import FormMain, { App } from "../FormMain/FormMain";
 
 function Card() {
   return (

@@ -77,7 +77,7 @@ function SwapCard() {
             <div style={{display:"flex"}} className="w-440 h-48">
               <Form.Control className="pay-input" size="lg" type="text" placeholder="0" />
               <Form.Select className="pay-select" aria-label="Default select example">
-                <option>SELECT</option>
+                <option>Select</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>
                 <option value="3">Three</option>
@@ -92,7 +92,7 @@ function SwapCard() {
             <div style={{display:"flex"}} className="w-440 h-48">
               <Form.Control className="pay-input" size="lg" type="text" placeholder="0" />
               <Form.Select className="pay-select" aria-label="Default select example">
-                <option>SELECT</option>
+                <option>Select</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>
                 <option value="3">Three</option>
