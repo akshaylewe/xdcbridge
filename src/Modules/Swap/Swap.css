@@ -1,0 +1,97 @@
+.swap-box{
+    margin: 70px 16% 0 27%;
+    
+}
+.swap-card{
+    width: 495px;
+height: 460px;
+/* UI Properties */
+background: #FFFFFF 0% 0% no-repeat padding-box;
+border-radius: 12px;
+opacity: 1;
+margin: 0 0 0 28%;
+}
+.card-title{
+    display: flex;
+    justify-content: end;
+}
+.mt-90{
+    margin-top: 90px;
+}
+.up-down{
+    display: flex;
+    justify-content: center;
+    margin-top: 39px;
+    margin-bottom: 16px;
+}
+.pay-input{
+    position:relative;
+    border-right:none;
+    padding:none;
+    border-radius: 26px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    text-align: left;
+font: normal normal medium 16px/20px Inter;
+letter-spacing: 0px;
+color: #101010;
+opacity: 1;
+}
+.pay-select{
+    border-left:none;
+    padding:none;
+    border-radius: 26px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    text-align: right;
+font: normal normal medium 16px/20px Inter;
+letter-spacing: 0px;
+color: #101010;
+opacity: 1;
+}
+.w-440{
+    width: 440px; 
+}
+.h-48{
+    height: 48px;
+}
+.swap-button{
+    width: 440px;
+height: 48px;
+/* UI Properties */
+background: #2358E5 0% 0% no-repeat padding-box;
+border-radius: 26px;
+opacity: 1;
+}
+.faq{
+    margin-right: 30%;
+    margin-top: 118px;
+    margin-bottom: 69px;
+}
+.styles_faq-row-wrapper__3vA1D .styles_faq-row__2YF3c {
+    font: normal normal normal 15px/19px Inter;
+}
+.styles_faq-row-wrapper__3vA1D .styles_row-body__1NvUo .styles_faq-row__2YF3c .styles_row-title__1YiiY .styles_row-title-text__1MuhU {
+    text-align: left;
+    font: normal normal normal 15px/19px Inter;
+    letter-spacing: 0px;
+
+}
+.mr-10 {
+    margin-right: 10px;
+  }
+.you-label {
+
+height: 19px;
+/* UI Properties */
+text-align: left;
+font: normal normal 600 15px/19px Inter;
+letter-spacing: 0px;
+color: #404040;
+opacity: 1;
+margin-left: 15px;
+}
+.styles_faq-row-wrapper__3vA1D .styles_faq-row__2YF3c {
+    border: 1px solid #ECECEC !important;
+    opacity: 1 !important;
+}

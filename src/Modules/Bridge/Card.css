@@ -1,0 +1,11 @@
+.my-card {
+  background-color: white;
+  width: 606px;
+  height: 600px;
+  border-radius: 10px;
+  padding: 20px;
+  margin-left: 37%;
+    margin-top: 4%;
+    margin-bottom: 98px;
+    box-shadow: none !important;
+}

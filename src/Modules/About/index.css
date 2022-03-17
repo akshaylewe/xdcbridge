@@ -1,0 +1,54 @@
+.content-box {
+  position: relative;
+  right: 312px;
+  margin: 45px;
+}
+.connect-wallet {
+  width: 284px;
+  height: 44px;
+  border-radius: 106px;
+}
+.connect-wallet>img {
+  position: relative;
+  right: 30px;
+  top: -2px;
+}
+.card-about {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.card-paper {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 12px !important;
+  opacity: 1;
+  box-shadow: none !important;
+  padding: 34px 0 0 5%;
+}
+.card-paper>img {
+margin-left: 40px;
+position: relative;
+top: -13px;
+}
+
+.p-heading {
+    width: 64px;
+    height: 19px;
+    /* UI Properties */
+    text-align: center;
+    font: normal normal 600 15px/19px Inter;
+    letter-spacing: 0px;
+    color: #101010;
+    opacity: 1;
+    margin-left: 65px;
+    margin-top: 17px;
+}
+.p-subheading {
+    width: 172px;
+    height: 57px;
+    /* UI Properties */
+    text-align: center;
+    font: normal normal normal 15px/19px Inter;
+    letter-spacing: 0px;
+    color: #404040;
+    opacity: 1;
+    margin-left: 14px;
+}

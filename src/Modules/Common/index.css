@@ -1,0 +1,14 @@
+.drawer-content>div {
+    background: #102C78 0% 0% no-repeat padding-box !important;
+}
+.list-text {
+    width: 44px;
+height: 19px;
+font: normal normal 600 15px/19px Inter;
+letter-spacing: 0px;
+color: #FFFFFF;
+opacity: 1;
+}
+.list-item {
+    margin-bottom: 21px !important;
+}

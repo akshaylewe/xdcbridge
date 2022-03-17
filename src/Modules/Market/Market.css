@@ -1,0 +1,28 @@
+.pool-box{
+    margin: 70px 16% 70px 27%;
+    
+}
+.investment-div{
+    display: flex;
+    justify-content: center;
+}
+.investment-div>p{
+    width: 234px;
+    height: 36px;
+    /* UI Properties */
+    text-align: center;
+    font: normal normal 600 30px/36px Inter;
+    letter-spacing: 0px;
+    color: #102C78;
+    opacity: 1;
+}
+.top-token>p{
+    width: 111px;
+height: 24px;
+/* UI Properties */
+text-align: left;
+font: normal normal 600 20px/24px Inter;
+letter-spacing: 0px;
+color: #101010;
+opacity: 1;
+}
