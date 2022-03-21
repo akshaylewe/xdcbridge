@@ -7,19 +7,18 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import Select from "react-select";
 import xdc3 from "../../utils/xdc3";
-import web3 from "../../utils/web3";
+import Web3 from "web3";
 import token from "../../utils/xtoken";
 import xbridge from "../../utils/xbridge";
-import ebridge from '../../utils/ebridge';
-import deploy from '../../utils/deploy';
 import tokenList from '../../contracts/tokenlist.json'
-import { tokenAddress, tokenBridge, tokenDeployee } from '../../common/constant';
+import Bridge from "../../contracts/bridge.json"
+import Deploy from "../../contracts/deployer.json";
+import { tokenBridge, tokenDeployee, eBridgeAddress, deployee } from '../../common/constant';
 
-let debridgeId, submissionId;
+let debridgeId, submissionId, signatures, abc, transactionHash;
 
 
 function BridgeCard() {
-  const [submissionId, setSubmissionId] = useState("");
   const [buttonText, setButtonText] = useState("");
   const [address, setAddress] = useState("");
   const [amount, setAmount] = useState("");
@@ -65,42 +64,81 @@ function BridgeCard() {
         from: accounts[0],
         to: address, //contractAddress of the concerned token (same in data below)
         gas: 28000,
-      value : amount,
+        value : amount,
         data: token.methods.approve(address,xdc3.utils.toWei(amount, "ether")).encodeABI()
         //value given by user should be multiplied by 1000
       };
 
-           await window.web3.eth
-          .sendTransaction(transaction)
-          .on("confirmation", function (confirmationNumber, receipt) {
-          if(receipt && confirmationNumber === 1){
-                console.log("transaction hash ", receipt.transactionHash);
-          }
+      await window.web3.eth
+      .sendTransaction(transaction)
+      .on("confirmation", function (confirmationNumber, receipt) {
+      if(receipt && confirmationNumber === 1){
+            console.log("transaction hash ", receipt.transactionHash);
+      }
 
-          });
+      });
 
-  await  console.log("accounts",accounts[0]);
+      await  console.log("accounts",accounts[0]);
 
-  await  alert("step2");
-    let result = await  xbridge.methods.send(
-      selectedOptionToken.address ,//address _tokenAddress,
-      xdc3.utils.toWei(amount, "ether"), // token _amount
-      selectedOptionDestination.value,// _chainIdTo
-      address, //_receiver
-      "0x", // _permit
-      false, //_useAssetFee
-      0, //_referralCode  
-      "0x" //_autoParams
-    ).send({ //sending the tokens to the reciever
-      from: accounts[0], //Sender Address
-      value: xdc3.utils.toWei(amount, "ether"), //Amount
-    });
-    console.log("transaction hash", result);
+      await  alert("step2");
+
+      transaction = {
+        from: accounts[0],
+        to: '0xE4200cbf10ea0D3F8FE35B59cF9fCF21e911a743', //contractAddress of the concerned token (same in data below)
+        gas: 150000,
+        value : xdc3.utils.toWei(amount, "ether"),
+        data: xbridge.methods.send(
+          selectedOptionToken.address ,//address _tokenAddress,
+          xdc3.utils.toWei(amount, "ether"), // token _amount
+          selectedOptionDestination.value,// _chainIdTo
+          address, //_receiver
+          "0x", // _permit
+          false, //_useAssetFee
+          0, //_referralCode  
+          "0x" //_autoParams
+        ).encodeABI()
+        //value given by user should be multiplied by 1000
+      };
+      await window.web3.eth
+      .sendTransaction(transaction)
+      .on("confirmation", function (confirmationNumber, result) {
+      if(result && confirmationNumber === 1){
+            transactionHash = result.transactionHash;
+      }
+
+      });
+      
+      const requestOptions = {
+       method: 'POST',
+       headers: { 'Content-Type': 'application/json' },
+       body: JSON.stringify({"id":transactionHash})
+   };
+    let var1 = 0;
+    while(var1==0){
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({"id":transactionHash})
+    };
+      await fetch('http://localhost:8000', requestOptions)
+       .then(response => response.json())
+       .then(data => {abc = data} );
+      console.log(abc.status)
+      if (abc.status != 0){
+        var1 = 1;
+      }
+    };
+    
+       
+    
+    console.log("transaction hash", transactionHash);
     alert("oeoe");
     alert("Successfully sent the Token");
-    setSubmissionId(result.events.Sent.returnValues[0]);
-    const debridgeId = result.events.Sent.returnValues[1];
-    setHash(result.transactionHash);
+    console.log(abc);
+    debridgeId = abc.debridgeId;
+    submissionId = abc.submissionId;
+    signatures = abc.signature;
+    setHash(transactionHash);
     console.log(submissionId, debridgeId);
   };
 
@@ -113,13 +151,20 @@ function BridgeCard() {
     event.preventDefault();
      
     /**
-     * @dev switching the network to the ropthen.
-     * @param chainid chain id of the ropthen testnet.
+     * @dev switching the network to the ropsten.
+     * @param chainid chain id of the ropsten testnet.
      */
 
 
     console.log(submissionId, debridgeId);
-//todo if condition
+    await window.ethereum.request({method: 'eth_requestAccounts'});
+    window.web3 = new Web3(window.ethereum);
+    const web3 = new Web3(window.ethereum);
+    const bridgeAddress = eBridgeAddress;
+    const ebridge = new web3.eth.Contract(Bridge.abi, bridgeAddress);
+    const deployerAddress = deployee;
+    const deploy = new web3.eth.Contract(Deploy.abi, deployerAddress);
+    //todo if condition
     //fetching the address of the sender through metamask
     const accounts = await web3.eth.getAccounts();
     console.log("", accounts);
@@ -133,7 +178,7 @@ function BridgeCard() {
     //deploying the smart contract ERC20
     const deployAsset = await deploy.methods.deployAsset(debridge_id, 'Token Mapped with XDC Chain', 'WXDC1', 18).call();
     const _token = tokenDeployee;
-    console.log(debridge_id, deployAsset, isSubmissionUsed, _token);
+    console.log(deployAsset, _token);
 
         /**
      * @dev Get the hash value and the result.
@@ -157,7 +202,7 @@ function BridgeCard() {
       selectedOptionToken.chainId,
       address,
       submissionId,
-      '0x',
+      signatures,
       autoParamsFrom,
       _token
     ).send({
@@ -195,7 +240,7 @@ function BridgeCard() {
   const data = [
     {
       value: 3,
-      text: "Ropthen",
+      text: "Ropsten",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -255,7 +300,7 @@ function BridgeCard() {
     },
     {
       value: 3,
-      text: "Ropthen",
+      text: "Ropsten",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
