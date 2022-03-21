@@ -13,7 +13,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import SearchIcon from "@mui/icons-material/Search";
-
+import { Link } from "react-router-dom";
 import "./Pool.css";
 
 const useStyles = makeStyles({
@@ -133,8 +133,9 @@ function PoolCard() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
-                  <TableRow key={row.name}>
+                   {rows.map((row) => (
+                      
+           <TableRow component={Link} to="/pool-detail" key={row.name}>
                     <TableCell component="th" scope="row">
                       {row.id}
                     </TableCell>
@@ -144,6 +145,7 @@ function PoolCard() {
                     <TableCell>{row.Volume}</TableCell>
                     <TableCell>{row.APR}</TableCell>
                   </TableRow>
+                 
                 ))}
               </TableBody>
             </Table>

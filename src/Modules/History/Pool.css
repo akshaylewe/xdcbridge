@@ -109,3 +109,23 @@ font-size: 16px !important;
     color:  #404040 !important;
     font-size: 15px !important;
 }
+.filter-Export{
+    display: flex;
+    position: fixed;
+    left: 74%;
+    top: 197px;
+}
+.filter-button{
+    width: 91px;
+height: 36px;
+background: #2358E5 0% 0% no-repeat padding-box;
+border-radius: 26px;
+opacity: 1;
+border: none;
+font: normal normal normal 15px/19px Inter;
+letter-spacing: 0px;
+color: #FFFFFF;
+}
+.mr12{
+    margin-right: 12px;
+}

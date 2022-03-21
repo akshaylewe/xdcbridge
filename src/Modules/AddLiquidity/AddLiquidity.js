@@ -11,7 +11,7 @@ import Modal from "@mui/material/Modal";
 import Popover from "@mui/material/Popover";
 import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
 
-import "./Swap.css";
+import "./Liquidity.css";
 
 const data = {
   title: "Swapping FAQ",
@@ -71,54 +71,18 @@ const style = {
   p: 4,
   borderRadius: "12px",
 };
-function SwapCard() {
+function Liquidity() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
     <Box className="swap-box">
-      <Card className="swap-card">
+      <Card className="swap-card-add">
         <Card.Body>
           <Card.Title className="card-title">
-            <OverlayTrigger
-              delay={{ hide: 450, show: 300 }}
-              overlay={(props) => (
-                <Tooltip {...props} id="tooltip-top">
-                  <p className="refresh">Auto Refresh On</p>
-                  <p className="refresh-p">
-                    Click on the icon to turn Auto-refresh off
-                  </p>
-                </Tooltip>
-              )}
-              placement="bottom"
-            >
-              <button className="auto-refresh">
-                {" "}
-                <img className="mr-10" src="/images/Auto fresh on.svg" />
-              </button>
-            </OverlayTrigger>
-
             {/* <img className="mr-10" src="/images/Auto fresh on.svg" /> */}
             {"  "}
-            <OverlayTrigger
-              delay={{ hide: 450, show: 300 }}
-              overlay={(props) => (
-                <Tooltip {...props} id="tooltip-top">
-                  <p className="refresh">Refresh</p>
-                  <p className="refresh-p">
-                    Tap on the icon to refresh the price of the selected token
-                    pair
-                  </p>
-                </Tooltip>
-              )}
-              placement="bottom"
-            >
-              <button className="auto-refresh">
-                {" "}
-                <img className="mr-10" src="/images/refresh.svg" />
-              </button>
-            </OverlayTrigger>
 
             {"  "}
 
@@ -138,7 +102,10 @@ function SwapCard() {
                     <img src="/images/settings.svg" />
                   </button>
                   <Popover
-                    style={{ width: "351px !important", height: "431px !important" }}
+                    style={{
+                      width: "351px !important",
+                      height: "431px !important",
+                    }}
                     {...bindPopover(popupState)}
                     anchorOrigin={{
                       vertical: "bottom",
@@ -169,8 +136,8 @@ function SwapCard() {
 
             {"  "}
           </Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">
-            <Form.Label className="you-label">You Pay</Form.Label>
+          <Card.Subtitle className="mb3 text-muted">
+            {/* <Form.Label className="you-label">You Pay</Form.Label> */}
             <div style={{ display: "flex" }} className="w-440 h-48">
               <Form.Control
                 className="pay-input"
@@ -189,11 +156,9 @@ function SwapCard() {
               </Form.Select>
             </div>
           </Card.Subtitle>
-          <Card.Subtitle className="text-muted up-down">
-            <img src="/images/swapcard.svg"></img>
-          </Card.Subtitle>
+
           <Card.Subtitle className="mb-2 text-muted">
-            <Form.Label className="you-label">You Get</Form.Label>
+            {/* <Form.Label className="you-label">You Get</Form.Label> */}
             <div style={{ display: "flex" }} className="w-440 h-48">
               <Form.Control
                 className="pay-input"
@@ -261,7 +226,7 @@ function SwapCard() {
             </div>
 
             <Button className="swap-button" onClick={handleOpen}>
-              Swap Now
+            Add Liquidity
             </Button>
             <Modal
               className="swap-modal"
@@ -304,4 +269,4 @@ function SwapCard() {
   );
 }
 
-export default SwapCard;
+export default Liquidity;

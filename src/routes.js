@@ -6,6 +6,8 @@ import Swap from "./Modules/Swap";
 import Pool from "./Modules/Pool"
 import Market from "./Modules/Market"
 import History from "./Modules/History"
+import PoolDetail from "./Modules/PoolDetail"
+import AddLiquidity from "./Modules/AddLiquidity";
 import {
   BrowserRouter as Router,
   Routes,
@@ -13,6 +15,7 @@ import {
   Link,
   Switch,
 } from "react-router-dom";
+
 
 function App() {
   return (
@@ -30,7 +33,8 @@ function App() {
           <Route path="/market" element={<Market />} />
           <Route path="/about" element={<About />} />
           <Route path="/history" element={<History />} />
-          {/* <Route path="/about" element={<About />} /> */}
+          <Route path="/pool-detail" element={<PoolDetail />} />
+          <Route path="/add-liquidity" element={<AddLiquidity />} />
         </Routes>
       </Router>
     </div>
