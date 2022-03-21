@@ -101,16 +101,16 @@
 }
 
 .submit-button {
-  width: 566px;
-  height: 48px;
   background-color: #103f9c;
   color: white;
   border-radius: 20px;
   text-align: center;
   margin-top: 30px;
-  font-size: small;
-  padding: 10px;
-  border: 0px;
+  width: 566px;
+  height: 48px;
+  /* background: #103f9c 0% 0% no-repeat padding-box; */
+  border-radius: 27px;
+  /* opacity: 0.5; */
 }
 
 .category-label {
@@ -123,6 +123,11 @@
   align-items: left;
   justify-content: left;
   margin-top: 8px;
+  font: normal normal normal 15px/19px Inter;
+letter-spacing: 0px;
+color: #1D1D1D !important;
+opacity: 1;
+margin-left: 22px;
 }
 
 .hint-label {

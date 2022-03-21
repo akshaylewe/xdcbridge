@@ -10,7 +10,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import { Link } from "react-router-dom";
 import "./index.css";
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 export default function SideBar() {
   return (
     <Box sx={{ flexGrow: 1 }} >
@@ -28,7 +28,7 @@ export default function SideBar() {
         className="drawer-content"
       >
         <Toolbar>
-          <h4 style={{ fontWeight: "bold",color:"white" }}>SMARTSWAP</h4>
+          <img style={{ width: "147px" }} src="/images/Logo@2x.png"></img>
         </Toolbar>
 
         <List>
@@ -74,6 +74,15 @@ export default function SideBar() {
             <ListItemText className="list-text">History</ListItemText>
           </ListItem>
         </List>
+        <div style={{position:"absolute", bottom:"0",left: "18px"}}>
+          <div style={{display:"flex",    marginBottom: "11px"}}>
+<img src="/images/Night mode.png"></img>
+<input className="footer-input" placeholder="$USD"></input>
+          </div>
+          <div>
+          <p className="powered">Powered by:&nbsp;XDC</p>
+            </div>
+        </div>
       </Drawer>
     </Box>
   );

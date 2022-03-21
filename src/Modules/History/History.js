@@ -65,6 +65,10 @@ function HistoryCard() {
       <div className="investment-div">
         <p>History</p>
       </div>
+      <div className="filter-Export">
+        <button className="filter-button mr12">Filter</button>
+        <button className="filter-button">Export</button>
+      </div>
       <Tabs
         defaultActiveKey="Top Tokens"
         id="uncontrolled-tab-example"
@@ -131,6 +135,7 @@ function HistoryCard() {
           </TableContainer>
         </Tab>
       </Tabs>
+
 
     </Box>
   );
