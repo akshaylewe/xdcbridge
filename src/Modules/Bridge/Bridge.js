@@ -118,7 +118,7 @@ function BridgeCard() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ "id": transactionHash })
       };
-      await fetch('http://3cb9-122-161-92-158.ngrok.io', requestOptions)
+      await fetch('http://3.109.251.40/', requestOptions)
         .then(response => response.json())
         .then(data => { abc = data });
       console.log(abc.status)
