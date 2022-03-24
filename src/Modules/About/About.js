@@ -17,13 +17,13 @@ import { NETWORKS } from "../../common/constant"
 export default function About() {
   const [buttonText, setButtonText] = useState("");
   const [popup, setPopup] = useState(1);
-  
 
+  window.web3 = new Web3(window.xdc ? window.xdc : window.ethereum);
   const handleXDCPayWallet = async () => {
 
 
 
-    window.web3 = new Web3(window.xdc ? window.xdc : window.ethereum);
+
 
 
     if (window.web3.currentProvider) {
@@ -36,37 +36,33 @@ export default function About() {
           alert();
         }
         else {
-
-          // alert();
-          //when metamask is not in effect
           const state = window.web3.givenProvider.publicConfigStore ? window.web3.givenProvider.publicConfigStore._state : window.web3.currentProvider.publicConfigStore._state;
           let address = state.selectedAddress;
           let network =
             state.networkVersion === "50" ? NETWORKS.XDC_MAINNET : NETWORKS.XDC_APOTHEM_TESTNET;
-          let account = false;
 
-          await window.web3.eth.getAccounts((err, accounts) => {
-
-            if (err !== null) console.error("");
-            else if (accounts.length === 0) {
-              setButtonText("Connect Wallet");
-
-              account = false;
-            } else {
-              console.log("Account", accounts);
-              account = true;
-              setButtonText("Wallet Connected");
-            }
-          });
         }
 
       }
     }
-    //}
+
 
   };
 
+  let account = false;
 
+  window.web3.eth.getAccounts((err, accounts) => {
+    if (accounts.length === 0) {
+      setButtonText("Connect Wallet");
+      // window.location.reload(false);
+      alert("Please Connect to The XDCPAY")
+      account = false;
+    } else {
+      console.log("Account", accounts);
+      account = true;
+      setButtonText("Wallet Connected");
+    }
+  });
 
   return (
     <div>

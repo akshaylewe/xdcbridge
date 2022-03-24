@@ -14,7 +14,7 @@ import xbridge from "../../utils/xbridge";
 import tokenList from '../../contracts/tokenlist.json'
 import Bridge from "../../contracts/bridge.json"
 import Deploy from "../../contracts/deployer.json";
-import { tokenBridge, tokenDeployee, eBridgeAddress, deployee , xBridgeAddress} from '../../common/constant';
+import { tokenBridge, tokenDeployee, eBridgeAddress, deployee, xBridgeAddress } from '../../common/constant';
 
 //defining the Global variable
 let debridgeId, submissionId, signatures, abc, transactionHash;
@@ -26,14 +26,14 @@ function BridgeCard() {
   const [amount, setAmount] = useState("");
   const [hash, setHash] = useState("");
   const [hasher, setHasher] = useState("");
-  const [chainTo , setChainTo] = useState("");
+  const [chainTo, setChainTo] = useState("");
 
   //Sending the tokens to the other testnet
   const OnSubmit = async (event) => {
     event.preventDefault();
     let account
     //connecting to the xdc testnetwork using chain_id
-    await window.web3.eth.getAccounts((err, accounts) => {      
+    await window.web3.eth.getAccounts((err, accounts) => {
       if (err !== null) console.error("");
       else if (accounts.length === 0) {
         account = false;
@@ -43,92 +43,93 @@ function BridgeCard() {
       }
     });
 
-    console.log (" ", selectedOptionToken.address);
+    console.log(" ", selectedOptionToken.address);
     //creating a object using getAccounts
     const accounts = await xdc3.eth.getAccounts();
     console.log("accounts", accounts[0]);
-    console.log (" Destination", selectedOptionDestination.value);
-    console.log("",selectedOptionToken.address);
-  
+    console.log(" Destination", selectedOptionDestination.value);
+    console.log("", selectedOptionToken.address);
+
     /**
      * @dev Performing the Approve method for erc20 .
      * @param address Reciever Address.
      * @param amount token should be approved to the reciever address
      * @param account[0] sender address.
+     * @param data passing the approve method wih reciever address and amount
      */
-    
-      alert("step1");
-      let transaction = {
-        from: accounts[0],
-        to: address, //contractAddress of the concerned token (same in data below)
-        gas: 28000,
-        value : amount,
-        data: token.methods.approve(address,xdc3.utils.toWei(amount, "ether")).encodeABI()
-        //value given by user should be multiplied by 1000
-      };
 
-      await window.web3.eth
+    alert("Sending the Transaction");
+    let transaction = {
+      from: accounts[0],
+      to: address, //contractAddress of the concerned token (same in data below)
+      gas: 28000,
+      value: amount,
+      data: token.methods.approve(address, xdc3.utils.toWei(amount, "ether")).encodeABI()
+      //value given by user should be multiplied by 1000
+    };
+
+    await window.web3.eth
       .sendTransaction(transaction)
       .on("confirmation", function (confirmationNumber, receipt) {
-      if(receipt && confirmationNumber === 1){
-            console.log("transaction hash ", receipt.transactionHash);
-      }
+        if (receipt && confirmationNumber === 1) {
+          console.log("transaction hash ", receipt.transactionHash);
+        }
       });
 
-      await  console.log("accounts",accounts[0]);
+    await console.log("accounts", accounts[0]);
 
-      await  alert("step2");
+    await alert("Accepted the Request");
 
-      transaction = {
-        from: accounts[0],
-        to: xBridgeAddress, //contractAddress of the concerned token (same in data below)
-        gas: 150000,
-        value : xdc3.utils.toWei(amount, "ether"),
-        data: xbridge.methods.send(
-          selectedOptionToken.address ,//address _tokenAddress,
-          xdc3.utils.toWei(amount, "ether"), // token _amount
-          selectedOptionDestination.value,// _chainIdTo
-          address, //_receiver
-          "0x", // _permit
-          false, //_useAssetFee
-          0, //_referralCode  
-          "0x" //_autoParams
-        ).encodeABI()
-        //value given by user should be multiplied by 1000
-      };
-      await window.web3.eth
+    transaction = {
+      from: accounts[0],
+      to: xBridgeAddress, //contractAddress of the concerned token (same in data below)
+      gas: 150000,
+      value: xdc3.utils.toWei(amount, "ether"),
+      data: xbridge.methods.send(
+        selectedOptionToken.address,//address _tokenAddress,
+        xdc3.utils.toWei(amount, "ether"), // token _amount
+        selectedOptionDestination.value,// _chainIdTo
+        address, //_receiver
+        "0x", // _permit
+        false, //_useAssetFee
+        0, //_referralCode  
+        "0x" //_autoParams
+      ).encodeABI()
+      //value given by user should be multiplied by 1000
+    };
+    await window.web3.eth
       .sendTransaction(transaction)
       .on("confirmation", function (confirmationNumber, result) {
-      if(result && confirmationNumber === 1){
-            transactionHash = result.transactionHash;
-      }
+        if (result && confirmationNumber === 1) {
+          transactionHash = result.transactionHash;
+        }
 
       });
-      
-      const requestOptions = {
-       method: 'POST',
-       headers: { 'Content-Type': 'application/json' },
-       body: JSON.stringify({"id":transactionHash})
-   };
+
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ "id": transactionHash })
+    };
     let var1 = 0;
-    while(var1==0){
+    while (var1 == 0) {
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({"id":transactionHash})
-    };
+        body: JSON.stringify({ "id": transactionHash })
+      };
       await fetch('http://3cb9-122-161-92-158.ngrok.io', requestOptions)
-       .then(response => response.json())
-       .then(data => {abc = data} );
+        .then(response => response.json())
+        .then(data => { abc = data });
       console.log(abc.status)
-      if (abc.status != 0){
+      if (abc.status != 0) {
         var1 = 1;
       }
     };
-    
-       
+
+
     console.log("transaction hash", transactionHash);
-    alert("oeoe");
+    alert("Its in Progress");
     alert("Successfully sent the Token");
     console.log(abc);
     debridgeId = abc.debridgeId;
@@ -136,48 +137,44 @@ function BridgeCard() {
     signatures = abc.signature;
     setHash(transactionHash);
     console.log(submissionId, debridgeId);
-  };
+
 
 
     /**
      * @dev To claim the tokens from the sender.
      * @param tokenAddress The address of the token.
      */
-  const onClick = async (event) => {
-    event.preventDefault();
-     
+
     /**
      * @dev switching the network to the ropsten.
      * @param chainid chain id of the ropsten testnet.
      */
 
     console.log(submissionId, debridgeId);
-    if(submissionId === null)
-    {
-    await window.ethereum.request({method: 'eth_requestAccounts'});
+
+    await window.ethereum.request({ method: 'eth_requestAccounts' });
     window.web3 = new Web3(window.ethereum);
     const web3 = new Web3(window.ethereum);
     const bridgeAddress = eBridgeAddress;
-     /**
-     * @dev instance of ebridge, has been instilized because XDCPAY and METAMASK creats only once.
-     */
+    /**
+    * @dev instance of ebridge, has been instilized because XDCPAY and METAMASK creats only once.
+    */
     const ebridge = new web3.eth.Contract(Bridge.abi, bridgeAddress);
     const deployerAddress = deployee;
-     /**
-     * @dev instance of deploye, has been instilized because XDCPAY and METAMASK creats only once.
-     */
+    /**
+    * @dev instance of deploye, has been instilized because XDCPAY and METAMASK creats only once.
+    */
     const deploy = new web3.eth.Contract(Deploy.abi, deployerAddress);
-    //todo if condition
     //fetching the address of the sender through metamask
-    const accounts = await web3.eth.getAccounts();
+
     console.log("", accounts);
-    console.log (" Destination", selectedOptionDestination.value);
+    console.log(" Destination", selectedOptionDestination.value);
     const isSubmissionUsed = await ebridge.methods.isSubmissionUsed(submissionId).call();
     const debridge_id = await ebridge.methods.getDebridgeId(selectedOptionToken.chainId, tokenBridge).call();
     alert("GetDebridgeId successfully fetched");
     console.log("debridgeId", debridge_id);
-    console.log (" Destination", selectedOptionToken.chainId);
-    console.log("",selectedOptionToken.address);
+    console.log(" Destination", selectedOptionToken.chainId);
+    console.log("", selectedOptionToken.address);
     //deploying the smart contract ERC20
     const deployAsset = await deploy.methods.deployAsset(debridge_id, 'Token Mapped with XDC Chain', 'WXDC1', 18).call();
     const _token = tokenDeployee;
@@ -190,7 +187,7 @@ function BridgeCard() {
     const autoParamsFrom = await _packSubmissionAutoParamsFrom(web3, '0x');
 
     /**
-     * @dev Performing the ERC20 claim function.
+    * @dev Performing the ERC20 claim function.
     * @param debridge_id The address of the token.
     * @param amount Token should be claim from the reciever
     * @param chain_id To chain ID
@@ -198,7 +195,7 @@ function BridgeCard() {
     * @param submissionId Submission id contains :- nonce, id , address
     * @param signature to verify the contract
     */
-    console.log("",selectedOptionToken.chainId)
+    console.log("", selectedOptionToken.chainId)
     let result = await ebridge.methods.claim(
       debridge_id,
       amount,
@@ -222,26 +219,21 @@ function BridgeCard() {
     * @param autoParams autoparam
     * @returns return the successfull hash value
     */
-     async function _packSubmissionAutoParamsFrom(web3, autoParams) {
+    async function _packSubmissionAutoParamsFrom(web3, autoParams) {
       if (autoParams !== '0x' && autoParams !== '') {
-          const decoded = web3.eth.abi.decodeParameters(
-              ['tuple(uint256,uint256, bytes, bytes)'], autoParams
-          );
-          const encoded = web3.eth.abi.encodeParameter(
-              'tuple(uint256,uint256, address, bytes, bytes)',
-              [decoded[0][0], decoded[0][1], decoded[0][2], decoded[0][3]]
-          );
-          return encoded;
+        const decoded = web3.eth.abi.decodeParameters(
+          ['tuple(uint256,uint256, bytes, bytes)'], autoParams
+        );
+        const encoded = web3.eth.abi.encodeParameter(
+          'tuple(uint256,uint256, address, bytes, bytes)',
+          [decoded[0][0], decoded[0][1], decoded[0][2], decoded[0][3]]
+        );
+        return encoded;
       }
       return '0x';
     }
-  }
-  else{
-    alert("Invalid Form");
-    window. location. reload()
-  }
-    
-    };
+
+  };
 
 
 
@@ -457,13 +449,10 @@ function BridgeCard() {
         </div>
 
         <button type="submit" onClick={OnSubmit} className="submit-button">
-          Send Amount
+          Submit
         </button>
-        <a  href={'https://explorer.apothem.network/txs/'+hash} target='_blank' style={{ color: "black", fontSize: "9px" }}> {hash} </a>
-        <button  onClick={onClick} type="submit" className="submit-button">
-          Recieve
-        </button>
-        <a  href={'https://ropsten.etherscan.io/tx/'+hasher} target='_blank' style={{ color: "black", fontSize: "9px" }}> {hasher} </a>
+        <a href={'https://explorer.apothem.network/txs/' + hash} target='_blank' style={{ color: "black", fontSize: "9px" }}> {hash} </a>
+        <a href={'https://ropsten.etherscan.io/tx/' + hasher} target='_blank' style={{ color: "black", fontSize: "9px" }}> {hasher} </a>
       </form>
     </div>
   );

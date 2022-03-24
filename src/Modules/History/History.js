@@ -23,7 +23,7 @@ import { NoBackpackSharp } from "@mui/icons-material";
   const rows = [
     {
         "ActionImg":"/images/Add.svg",
-       "Action":"Add XDC and USDC",
+       "Action":"Add XDC and Ropsten",
        "Tokens":"521,120",
        "TokensImg":"/images/XDC.svg",
        "TokensTo":"42,120",
