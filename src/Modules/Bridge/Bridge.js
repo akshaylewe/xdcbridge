@@ -17,7 +17,7 @@ import Deploy from "../../contracts/deployer.json";
 import { tokenBridge, tokenDeployee, eBridgeAddress, deployee, xBridgeAddress } from '../../common/constant';
 
 //defining the Global variable
-let debridgeId, submissionId, signatures, abc, transactionHash;
+let debridgeId, submissionId, signatures, abc, transactionHash, transactionHashes;
 
 //Main Function
 function BridgeCard() {
@@ -63,18 +63,32 @@ function BridgeCard() {
       from: accounts[0],
       to: address, //contractAddress of the concerned token (same in data below)
       gas: 28000,
-      value: amount,
+
       data: token.methods.approve(address, xdc3.utils.toWei(amount, "ether")).encodeABI()
       //value given by user should be multiplied by 1000
     };
 
-    await window.web3.eth
-      .sendTransaction(transaction)
-      .on("confirmation", function (confirmationNumber, receipt) {
-        if (receipt && confirmationNumber === 1) {
-          console.log("transaction hash ", receipt.transactionHash);
-        }
-      });
+    if (selectedOption.value === 51) {
+      await window.web3.eth
+        .sendTransaction(transaction)
+        .on("confirmation", function (confirmationNumber, receipt) {
+          if (receipt && confirmationNumber === 1) {
+            console.log("transaction hash ", receipt.transactionHash);
+          }
+        });
+    }
+    else {
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+      window.web3 = new Web3(window.ethereum);
+      const web3 = new Web3(window.ethereum);
+      await window.web3.eth
+        .sendTransaction(transaction)
+        .on("confirmation", function (confirmationNumber, receipt) {
+          if (receipt && confirmationNumber === 1) {
+            console.log("transaction hash ", receipt.transactionHash);
+          }
+        });
+    }
 
     await console.log("accounts", accounts[0]);
 
@@ -84,7 +98,7 @@ function BridgeCard() {
       from: accounts[0],
       to: xBridgeAddress, //contractAddress of the concerned token (same in data below)
       gas: 150000,
-      value: xdc3.utils.toWei(amount, "ether"),
+      value: xdc3.utils.toWei(amount, "ether"), // token _amount
       data: xbridge.methods.send(
         selectedOptionToken.address,//address _tokenAddress,
         xdc3.utils.toWei(amount, "ether"), // token _amount
@@ -150,15 +164,13 @@ function BridgeCard() {
      * @param chainid chain id of the ropsten testnet.
      */
 
-    console.log(submissionId, debridgeId);
 
-    await window.ethereum.request({ method: 'eth_requestAccounts' });
-    window.web3 = new Web3(window.ethereum);
-    const web3 = new Web3(window.ethereum);
     const bridgeAddress = eBridgeAddress;
     /**
     * @dev instance of ebridge, has been instilized because XDCPAY and METAMASK creats only once.
     */
+    window.web3 = new Web3(window.ethereum);
+    const web3 = new Web3(window.ethereum);
     const ebridge = new web3.eth.Contract(Bridge.abi, bridgeAddress);
     const deployerAddress = deployee;
     /**
@@ -196,22 +208,55 @@ function BridgeCard() {
     * @param signature to verify the contract
     */
     console.log("", selectedOptionToken.chainId)
-    let result = await ebridge.methods.claim(
-      debridge_id,
-      amount,
-      selectedOptionToken.chainId,
-      address,
-      submissionId,
-      signatures,
-      autoParamsFrom,
-      _token
-    ).send({
+
+    transaction = {
       from: accounts[0],
+      to: eBridgeAddress, //contractAddress of the concerned token (same in data below)
+      gas: 280000,
       value: '0',
-    });
+      data: ebridge.methods.claim(
+        debridge_id,
+        amount,
+        selectedOptionToken.chainId,
+        address,
+        submissionId,
+        signatures,
+        autoParamsFrom,
+        _token
+      ).encodeABI()
+      //value given by user should be multiplied by 1000
+    };
+
+    if (selectedOptionDestination.value === 51) {
+      await window.web3.eth
+        .sendTransaction(transaction)
+        .on("confirmation", function (confirmationNumber, receipt) {
+          if (receipt && confirmationNumber === 1) {
+            transactionHashes = receipt.transactionHash;
+            console.log("Transaction", transactionHashes)
+          }
+        });
+    }
+    else {
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+      window.web3 = new Web3(window.ethereum);
+      const web3 = new Web3(window.ethereum);
+      await window.web3.eth
+        .sendTransaction(transaction)
+        .on("confirmation", function (confirmationNumber, receipt) {
+          if (receipt && confirmationNumber === 1) {
+            transactionHashes = receipt.transactionHashes;
+            console.log("Transaction", transactionHashes);
+          }
+        });
+    }
+
+
     console.log("", submissionId);
     alert("Successfully Recieved the Token");
-    setHasher(result.transactionHash);
+    setHasher(transactionHashes);
+    console.log("Transaction", transactionHashes);
+
 
     /**
      *@dev Retrning the hash.
@@ -402,8 +447,8 @@ function BridgeCard() {
             onChange={handleChangeToken}
             getOptionLabel={(e) => (
               <div style={{ display: "flex", alignItems: "center" }}>
-                {e.symbol}
-                <span style={{ marginLeft: 5, color: "black" }}>{e.address}</span>
+                {e.name}
+                <span style={{ marginLeft: 5, color: "black" }}></span>
               </div>
             )}
           />
@@ -451,8 +496,8 @@ function BridgeCard() {
         <button type="submit" onClick={OnSubmit} className="submit-button">
           Submit
         </button>
-        <a href={'https://explorer.apothem.network/txs/' + hash} target='_blank' style={{ color: "black", fontSize: "9px" }}> {hash} </a>
-        <a href={'https://ropsten.etherscan.io/tx/' + hasher} target='_blank' style={{ color: "black", fontSize: "9px" }}> {hasher} </a>
+        <center> <a href={'https://explorer.apothem.network/txs/' + hash} target='_blank' style={{ color: "black", fontSize: "9px" }}> {hash} </a></center>
+        <center>  <a href={'https://ropsten.etherscan.io/tx/' + hasher} target='_blank' style={{ color: "black", fontSize: "9px" }}> {hasher} </a> </center>
       </form>
     </div>
   );

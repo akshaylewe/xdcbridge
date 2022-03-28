@@ -69,12 +69,45 @@
         ]
       },
       {
-        "chainId": 101,
-        "address": "CbNYA9n3927uXUukee2Hf4tm3xxkffJPPZvGazc2EAH1",
-        "symbol": "agEUR",
-        "name": "agEUR (Wormhole)",
+        "chainId": 50,
+        "address": "0x536dd70445cea1e97f9bf1bada04cbda5199a2a1",
+        "symbol": "ECOIN",
+        "name": "ECOIN",
+        "decimals": 10,
+        "logoURI": "https://xinfin-explorer-s3.s3.amazonaws.com/token-symbol-image/ECOIN.png",
+        "tags": [
+          "currency", "xrc20"
+        ]
+      },
+      {
+        "chainId": 50,
+        "address": "0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "symbol": "WETH",
+        "name": "Wrapped Ether",
+        "decimals": 10,
+        "logoURI": "https://xinfin-explorer-s3.s3.amazonaws.com/token-symbol-image/ECOIN.png",
+        "tags": [
+          "currency", "xrc20"
+        ]
+      },
+      {
+        "chainId": 50,
+        "address": "0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "symbol": "WXDC",
+        "name": "Wrapped XDC",
+        "decimals": 10,
+        "logoURI": "https://xinfin-explorer-s3.s3.amazonaws.com/token-symbol-image/ECOIN.png",
+        "tags": [
+          "currency", "xrc20"
+        ]
+      },  
+      {
+        "chainId": 50,
+        "address": "0x5d5f074837f5d4618b3916ba74de1bf9662a3fed",
+        "symbol": "SRX",
+        "name": "STORX",
         "decimals": 8,
-        "logoURI": "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/CbNYA9n3927uXUukee2Hf4tm3xxkffJPPZvGazc2EAH1/logo.png",
+        "logoURI": "https://xinfin-explorer-s3.s3.amazonaws.com/token-symbol-image/SRX.png",
         "tags": [
           "ethereum",
           "wrapped",
