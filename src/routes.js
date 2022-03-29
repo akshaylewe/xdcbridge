@@ -8,6 +8,7 @@ import Market from "./Modules/Market"
 import History from "./Modules/History"
 import PoolDetail from "./Modules/PoolDetail"
 import AddLiquidity from "./Modules/AddLiquidity";
+import BridgeConfirm from "./Modules/Bridge/BridgeConfirm"
 import {
   BrowserRouter as Router,
   Routes,
@@ -35,6 +36,7 @@ function App() {
           <Route path="/history" element={<History />} />
           <Route path="/pool-detail" element={<PoolDetail />} />
           <Route path="/add-liquidity" element={<AddLiquidity />} />
+          <Route path="/bridge-confirm-transaction" element={<BridgeConfirm />} />
         </Routes>
       </Router>
     </div>

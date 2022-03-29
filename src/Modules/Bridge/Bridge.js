@@ -4,7 +4,7 @@ import ethereum from "../../assets/ethereum.svg";
 import copy from "../../assets/copy.png";
 import max from "../../assets/max.png";
 import "./FormMain.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import Select from "react-select";
 import xdc3 from "../../utils/xdc3";
@@ -41,7 +41,8 @@ function BridgeCard() {
         // console.log("Account",accounts);
         account = true;
       }
-    });
+    })
+    ;
 
     console.log(" ", selectedOptionToken.address);
     //creating a object using getAccounts
@@ -363,7 +364,11 @@ function BridgeCard() {
       ),
     },
   ];
-
+  const handleNavigate = () => {
+    // if (searchInput.trim() != "") dispatch(searchNav(searchInput));
+    let path = `/bridge-confirm-transaction`;
+    navigate(path);
+  };
 
 
   const [selectedOptionToken, setSelectedOptionToken] = useState(null);
@@ -492,10 +497,13 @@ function BridgeCard() {
             onChange={(e) => setAddress(e.target.value)}
           />
         </div>
-
-        <button type="submit" onClick={OnSubmit} className="submit-button">
-          Submit
+        <Link to="/bridge-confirm-transaction">
+next
+          </Link>
+          <button type="submit" onClick={OnSubmit} className="submit-button">
+          Next
         </button>
+
         <center> <a href={'https://explorer.apothem.network/txs/' + hash} target='_blank' style={{ color: "black", fontSize: "9px" }}> {hash} </a></center>
         <center>  <a href={'https://ropsten.etherscan.io/tx/' + hasher} target='_blank' style={{ color: "black", fontSize: "9px" }}> {hasher} </a> </center>
       </form>

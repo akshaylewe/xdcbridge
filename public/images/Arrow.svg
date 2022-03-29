@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+  <g id="Arrow" transform="translate(-482 -210)">
+    <rect id="Rectangle_92" data-name="Rectangle 92" width="30" height="30" transform="translate(482 210)" fill="none"/>
+    <g id="Next-Arrow" transform="translate(485 213.185)">
+      <path id="Path_8" data-name="Path 8" d="M229.456,149.41l-1.876,1.876,8.466,8.466H220c-.645,0-1.181,0-1.516,0h-.355a1.333,1.333,0,0,0-1.351,1.331,1.352,1.352,0,0,0,1.361,1.326h.045c.02,0,.04,0,.06,0h17.792l-8.455,8.461,1.876,1.876,10.732-10.728a1.335,1.335,0,0,0,0-1.876Z" transform="translate(-216.777 -149.41)" fill="#9d9d9d"/>
+    </g>
+  </g>
+</svg>
