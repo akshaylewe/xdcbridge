@@ -81,7 +81,7 @@
     border: 1px solid #D8D8D8 !important;
     border-radius: 24px !important;
     margin-top: 0px !important;
-    height: 48px !important;
+    /* height: 48px !important; */
     box-shadow: none !important;
 }
 .css-1n7v3ny-option {
@@ -433,7 +433,7 @@ margin-left: 22px;
 }
 .token-select > div {
   width: 566px;
-  height: 48px;
+  /* height: 48px; */
 }
 .destination > input {
   width: 566px;

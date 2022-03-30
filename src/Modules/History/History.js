@@ -13,59 +13,87 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Web3 from "web3";
 import SearchIcon from "@mui/icons-material/Search";
 
 import xdc3 from "../../utils/xdc3";
 
 import "./Pool.css";
-import { NoBackpackSharp } from "@mui/icons-material";
+import { ContactlessOutlined, NoBackpackSharp } from "@mui/icons-material";
 
 
 
-  let results;
-  const rows = []
+let results;
+const rows = []
 
 const useStyles = makeStyles({
-    table: {
-      minWidth: 650,
-    },
-  });
+  table: {
+    minWidth: 650,
+  },
+});
+
 function HistoryCard() {
   const classes = useStyles();
-  const [data, setData] = useState("");
-    const fetchURL = "https://bridgetest.blockfinch.com"
-    const getData = () =>
-      fetch(`${fetchURL}/txns`)
-        .then((res) => res.json())
+  const [data, setData] = useState("")
+  const [xdata, x] = useState("");
+  const [setToken, selectToken] = useState("");
+  let transaction;
+  const fetchURL = "https://bridgetest.blockfinch.com"
+  const getData = () =>
+    fetch(`${fetchURL}/txns`)
+      .then((res) => res.json())
+  useEffect(() => {
+    getData().then((data) => setData(data))
+  }, [])
 
-    useEffect(() => {
-      getData().then((data) => setData(data))
-    }, [])
-    console.log(data);
-    for (const x in data){
-     let ok = window.web3.eth.getTransaction(x);
-      rows.push(
-        {
-          "ActionImg":"/images/XDC.svg",
-         "Action":"to Ropsten",
-         "Tokens":"5",
-         "TokensImg":"/images/XDC.svg",
-         "TokensTo":"",
-          "Hash":x ,
-         "TokensToImg":"",
-         "Time":"2 min ago"
+  for (const x in data ) {
+    
+    rows.push(
+      {
+        "ActionImg": "/images/Add.svg",
+        "Action": "Sent to Ropsten",
+        "Tokens": setToken,
+        "TokensImg": "/images/XDC.svg",
+        "TokensTo": "",
+        "Hash": x,
+        "TokensToImg": "",
+        "Time": "2 min ago"
       }
-      )
-    };
+    )
+  
+}
+//  const index =length.[0, abc];
+
+  const History = async () => {
+
+    const Web3 = require('web3')
+    const web3 = new Web3(new Web3.providers.HttpProvider('https://rpc.apothem.network/'))
+
+    // Get address
+    const accounts = await web3.eth.getAccounts()
+    console.log(accounts)
+    
+  
+   
+    for(var i=0 ; i<=200;i++){
+        
+      console.log("action", data.data[i]);
+      transaction = await web3.eth.getTransaction(data.data[i]);
+    selectToken(web3.utils.fromWei(transaction.value, 'ether'));
+    x(transaction);
+  
+    }
+  console.log("accounsdhbsgdv",setToken);
+
+  };
+
   return (
     <Box className="pool-box">
       <div className="investment-div">
         <p>History</p>
       </div>
       <div className="filter-Export">
-        {/* <button className="filter-button mr12">Filter</button>
-        <button className="filter-button">Export</button> */}
+        <button onClick={History} className="filter-button mr12">Filter</button>
+        <button className="filter-button">Export</button>
       </div>
       <Tabs
         defaultActiveKey="Top Tokens"
@@ -82,7 +110,7 @@ function HistoryCard() {
                   <TableCell>Tokens</TableCell>
                   <TableCell>Hash</TableCell>
                   <TableCell>Time</TableCell>
-                
+
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -103,7 +131,7 @@ function HistoryCard() {
           </TableContainer>
         </Tab>
         <Tab eventKey="Your Liquidity" title="Pending">
-        <TableContainer component={Paper} >
+          <TableContainer component={Paper} >
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
                 <TableRow>
@@ -112,7 +140,7 @@ function HistoryCard() {
                   <TableCell>Tokens</TableCell>
                   <TableCell>Hash</TableCell>
                   <TableCell>Time</TableCell>
-                
+
                 </TableRow>
               </TableHead>
               <TableBody>
